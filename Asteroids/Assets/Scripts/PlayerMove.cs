@@ -15,31 +15,31 @@ public class PlayerMove : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerEvents.MoveEvent += Move;
-        PlayerEvents.RotateEvent += Rotate;
-        PlayerEvents.RotateMouseEvent += MouseRotate;
+        PlayerEvents.MoveEvent += OnMove;
+        PlayerEvents.RotateEvent += OnRotate;
+        PlayerEvents.RotateMouseEvent += OnMouseRotate;
     }
 
     private void OnDisable()
     {
-        PlayerEvents.MoveEvent -= Move;
-        PlayerEvents.RotateEvent -= Rotate;
-        PlayerEvents.RotateMouseEvent -= MouseRotate;
+        PlayerEvents.MoveEvent -= OnMove;
+        PlayerEvents.RotateEvent -= OnRotate;
+        PlayerEvents.RotateMouseEvent -= OnMouseRotate;
     }
 
-    private void Move()
+    private void OnMove()
     {
         _rigidbody.AddForce(transform.right * _acceleration * Time.deltaTime, ForceMode.Acceleration);
         _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _maxSpeed);
     }
 
-    private void Rotate(float angleDir)
+    private void OnRotate(float angleDir)
     {
         Quaternion rotEuler = Quaternion.Euler(Vector3.forward * angleDir * _speedOfRotate * Time.deltaTime);
         _rigidbody.MoveRotation(_rigidbody.rotation * rotEuler);
     }
 
-    private void MouseRotate(Vector3 mousePosition)
+    private void OnMouseRotate(Vector3 mousePosition)
     {
         Vector3 look = mousePosition - transform.position;
         float rotZ = Mathf.Atan2(look.y, look.x) * Mathf.Rad2Deg;

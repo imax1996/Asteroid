@@ -5,29 +5,31 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class ScreenBorder : MonoBehaviour
 {
-    private SphereCollider _sphereCollider;
     [SerializeField] private Vector2 _borderSizeWithRadius;
 
-    private void Awake()
+    private SphereCollider _sphereCollider;
+    private float offsetAfterChangePosition = -0.95f;
+
+    private void Start()
     {
         _sphereCollider = GetComponent<SphereCollider>();
-        Camera mainCamera = Camera.main;
-        float borderX = mainCamera.transform.position.x + mainCamera.orthographicSize * mainCamera.aspect + _sphereCollider.radius;
-        float borderY = mainCamera.transform.position.y + mainCamera.orthographicSize + _sphereCollider.radius;
-        _borderSizeWithRadius = new Vector2(borderX, borderY);
+        _borderSizeWithRadius = CameraBorder.GetCoordBorderCamera(Camera.main) + Vector2.one * _sphereCollider.radius * transform.localScale;
     }
 
     private void Update()
     {
+        Vector3 newPosition = transform.position;
+
         if (Mathf.Abs(transform.position.x) > _borderSizeWithRadius.x)
         {
-            transform.position = new Vector2(transform.position.x * -0.95f, transform.position.y);
+            newPosition = new Vector2(newPosition.x * offsetAfterChangePosition, newPosition.y);
         }
-
 
         if (Mathf.Abs(transform.position.y) > _borderSizeWithRadius.y)
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y * -0.95f);
+            newPosition = new Vector2(newPosition.x, newPosition.y * offsetAfterChangePosition);
         }
+
+        transform.position = newPosition;
     }
 }
