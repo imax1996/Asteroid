@@ -19,8 +19,11 @@ public class AsteroidController : MonoBehaviour
 
     private GameObject _anchorAsteroid;
 
+    private AudioSource _audioSource;
+
     public void Awake()
     {
+        _audioSource = GetComponent<AudioSource>();
         _allAsteroids = new List<GameObject>();
         _asteroidPool = new Stack<GameObject>();
         _borderMainCamera = CameraBorder.GetCoordBorderCamera(Camera.main);
@@ -91,6 +94,7 @@ public class AsteroidController : MonoBehaviour
         asteroid.SetActive(false);
         _asteroidPool.Push(asteroid);
         _levelController.CountOfAsteroids--;
+        _audioSource.Play();
     }
 
     private void TryToSeparate(GameObject asteroid)

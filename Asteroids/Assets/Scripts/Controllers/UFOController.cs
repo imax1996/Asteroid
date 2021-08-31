@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UFOController : MonoBehaviour
 {
@@ -8,6 +9,12 @@ public class UFOController : MonoBehaviour
     private Vector2 _rangeTimeToSpawn = new Vector2(20f, 40f);
     [SerializeField] private float _timeToSpawn;
     private bool inGame = false;
+    [SerializeField] private AudioSource _audioSource;
+
+    public void OnDeath()
+    {
+        _audioSource.Play();
+    }
 
     public void Init()
     {
@@ -18,6 +25,12 @@ public class UFOController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            _ufoMove.Spawn();
+            _timeToSpawn = Random.Range(_rangeTimeToSpawn.x, _rangeTimeToSpawn.y);
+        }
+
         if (!inGame || _ufoMove.isActiveAndEnabled)
         {
             return;

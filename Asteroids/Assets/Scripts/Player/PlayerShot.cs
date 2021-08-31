@@ -10,6 +10,7 @@ public class PlayerShot : MonoBehaviour
 
     [SerializeField] private int _fireRate = 3;
     private float _timeToShot = 0;
+    [SerializeField] private AudioSource _audioSource;
 
     private void OnEnable()
     {
@@ -31,5 +32,6 @@ public class PlayerShot : MonoBehaviour
         Vector3 directionToShot = (gunPos - transform.position).normalized;
         _bulletController.OnShot(_bulletMaterial, gunPos, directionToShot, gameObject);
         _timeToShot = Time.timeSinceLevelLoad;
+        _audioSource.Play();
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class UFO : MonoBehaviour, IDamagable
 {
+    [SerializeField] private UFOController _ufocontroller;
+
     private void OnTriggerEnter(Collider other)
     {
         other.TryGetComponent(typeof(IDamagable), out Component component);
@@ -12,5 +14,6 @@ public class UFO : MonoBehaviour, IDamagable
         }
 
         gameObject.SetActive(false);
+        _ufocontroller.OnDeath();
     }
 }

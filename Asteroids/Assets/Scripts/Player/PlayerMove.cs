@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     private Rigidbody _rigidbody = null;
+    private AudioSource _audioSource = null;
 
     [SerializeField] private float _maxSpeed = 3f;
     [SerializeField] private float _acceleration = 5f;
@@ -11,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -31,6 +33,8 @@ public class PlayerMove : MonoBehaviour
     {
         _rigidbody.AddForce(transform.right * _acceleration * Time.deltaTime, ForceMode.Acceleration);
         _rigidbody.velocity = Vector3.ClampMagnitude(_rigidbody.velocity, _maxSpeed);
+        if (_audioSource.isPlaying) return;
+        _audioSource.Play();
     }
 
     private void OnRotate(float angleDir)

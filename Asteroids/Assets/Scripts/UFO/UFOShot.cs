@@ -9,7 +9,8 @@ public class UFOShot : MonoBehaviour
     [SerializeField] private GameObject _playerShip;
 
     [SerializeField] private Vector2 _fireRate = new Vector2(2f, 5f);
-    private float _timeToShot = 0;
+    private float _timeToShot = 1;
+    [SerializeField] private AudioSource _audioSource;
 
     private void Update()
     {
@@ -26,5 +27,6 @@ public class UFOShot : MonoBehaviour
         Vector3 directionToShot = (_playerShip.transform.position - transform.position).normalized;
         _bulletController.OnShot(_bulletMaterial, transform.position, directionToShot, gameObject);
         _timeToShot = Random.Range(_fireRate.x, _fireRate.y);
+        _audioSource.Play();
     }
 }

@@ -10,6 +10,7 @@ public class Player : MonoBehaviour, IDamagable
 
     [SerializeField] private GameObject _model;
     private Rigidbody _rigidbody;
+    [SerializeField] private PlayerAudioController _audioController;
 
     private int _startHealth = 3;
     [SerializeField] private int _health;
@@ -82,6 +83,7 @@ public class Player : MonoBehaviour, IDamagable
 
         Restart();
         Health--;
+        _audioController._audioSource.Play();
     }
 
     private IEnumerator AnimationInvulnerability()

@@ -60,11 +60,11 @@ public class BulletController : MonoBehaviour
             _allBullets.Add(bullet);
         }
 
-        bullet.transform.position = posToCreateBullet;
-
         Rigidbody rigidbody = bullet.GetComponent<Rigidbody>();
         rigidbody.AddForce(direction * _speed, ForceMode.VelocityChange);
         rigidbody.MoveRotation(Quaternion.LookRotation(Vector3.forward, Quaternion.Euler(0, 0, 90) * direction));
+
+        bullet.transform.position = posToCreateBullet;
 
         Bullet bulletClass = bullet.GetComponent<Bullet>();
         bulletClass._offBullets = _bulletPool;
