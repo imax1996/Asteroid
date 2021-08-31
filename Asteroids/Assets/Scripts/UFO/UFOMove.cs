@@ -1,13 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UFOMove : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
     [SerializeField] private Camera _camera;
-    private float _percentOutBorderScreen = 20;
-    private float _timeToFlyOnWidth = 10;
+
+    private Rigidbody   _rigidbody;
+    private float       _percentOutBorderScreen = 20;
+    private float       _timeToFlyOnWidth = 10;
 
     private void Awake()
     {

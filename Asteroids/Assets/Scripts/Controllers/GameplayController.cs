@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class GameplayController : MonoBehaviour
 {
-    [SerializeField] private GameObject         _player = null;
-    [SerializeField] private LevelController    _levelController = null;
-    [SerializeField] private GameObject         _canvasMenu = null;
-    [SerializeField] private GameObject         _continueButton = null;
+    [SerializeField] private LevelController    _levelController;
+    [SerializeField] private GameObject         _player;
+    [SerializeField] private GameObject         _canvasMenu;
+    [SerializeField] private GameObject         _continueButton;
+    [SerializeField] private AudioMixer         _mixer;
 
     private void Start()
     {
@@ -16,14 +18,21 @@ public class GameplayController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) && _canvasMenu.activeInHierarchy == false)
         {
-            Time.timeScale = 0;
-            _canvasMenu.SetActive(true);
-            _continueButton.SetActive(true);
+            Pause();
         }
+    }
+
+    private void Pause()
+    {
+        Time.timeScale = 0;
+        _canvasMenu.SetActive(true);
+        _continueButton.SetActive(true);
+        _mixer.SetFloat("MasterVolume", -80f);
     }
 
     private void OnGameOver()
     {
+        _continueButton.SetActive(false);
         _canvasMenu.SetActive(true);
     }
 
@@ -32,6 +41,7 @@ public class GameplayController : MonoBehaviour
         Time.timeScale = 1;
         _continueButton.SetActive(false);
         _canvasMenu.SetActive(false);
+        _mixer.SetFloat("MasterVolume", 0f);
     }
 
     public void NewGame()
@@ -40,6 +50,7 @@ public class GameplayController : MonoBehaviour
         _canvasMenu.SetActive(false);
         _player.GetComponent<Player>().Init();
         _levelController.StartNewGame();
+        _mixer.SetFloat("MasterVolume", 0f);
     }
 
     public void ExitGame()

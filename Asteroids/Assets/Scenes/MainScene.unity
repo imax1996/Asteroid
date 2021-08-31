@@ -97,8 +97,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 658cf6590bd1f2540942a40a8a21cfd4, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 5d532af726a7a5048b0d07c581172bd9, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -771,8 +771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ufoMove: {fileID: 2588375333459667437}
-  _timeToSpawn: 0
   _audioSource: {fileID: 384588446}
+  _rangeTimeToSpawn: {x: 20, y: 40}
 --- !u!4 &384588445
 Transform:
   m_ObjectHideFlags: 0
@@ -1239,7 +1239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dde620eac5df81469ed11a48eb94400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _borderSizeWithRadius: {x: 0, y: 0}
 --- !u!114 &715665310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1267,10 +1266,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8547e343a1c515541a7172e6ad712cbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model: {fileID: 878560501}
   _audioController: {fileID: 1396031677}
-  _health: 0
-  _score: 0
+  _model: {fileID: 878560501}
+  _startHealth: 3
+  _timeOfInvulnerability: 3
+  _blinkRate: 2
 --- !u!135 &715665312
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1357,8 +1357,8 @@ MonoBehaviour:
   _bulletController: {fileID: 1071820427}
   _bulletMaterial: {fileID: 2100000, guid: f5e98ecf35d43f24ca44c7708a8df082, type: 2}
   _gun: {fileID: 1808935706}
-  _fireRate: 3
   _audioSource: {fileID: 1808935708}
+  _fireRate: 3
 --- !u!82 &715665318
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1721,9 +1721,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 798556657064652670, guid: bffa70af8f70bca47aadc2a4cbc7a72e, type: 3}
+  _materialBulletShip: {fileID: 2100000, guid: f5e98ecf35d43f24ca44c7708a8df082, type: 2}
+  _materialBulletUFO: {fileID: 2100000, guid: 04e90fbb962812749bd1bc40ca98f52b, type: 2}
   _speed: 10
-  _materialShip: {fileID: 2100000, guid: f5e98ecf35d43f24ca44c7708a8df082, type: 2}
-  _materialUFO: {fileID: 2100000, guid: 04e90fbb962812749bd1bc40ca98f52b, type: 2}
 --- !u!1 &1339508616
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,10 +2511,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849970df54d1b484b9d6ea174ad6e5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 715665308}
   _levelController: {fileID: 1780228254}
+  _player: {fileID: 715665308}
   _canvasMenu: {fileID: 608699101}
   _continueButton: {fileID: 666722261}
+  _mixer: {fileID: 24100000, guid: bda1980dba4354a488fd305814dfc7e5, type: 2}
 --- !u!4 &1698313046
 Transform:
   m_ObjectHideFlags: 0
@@ -2561,6 +2562,7 @@ MonoBehaviour:
   _asteroidController: {fileID: 1940830157}
   _bulletController: {fileID: 1071820427}
   _uFOController: {fileID: 384588444}
+  _delayNextLevel: 2
 --- !u!4 &1780228255
 Transform:
   m_ObjectHideFlags: 0
@@ -3478,8 +3480,8 @@ MonoBehaviour:
   _bulletController: {fileID: 1071820427}
   _bulletMaterial: {fileID: 2100000, guid: 04e90fbb962812749bd1bc40ca98f52b, type: 2}
   _playerShip: {fileID: 715665308}
-  _fireRate: {x: 2, y: 5}
   _audioSource: {fileID: 1580987385951220082}
+  _fireRate: {x: 2, y: 5}
 --- !u!82 &2588375333459667439
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3720,7 +3722,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dde620eac5df81469ed11a48eb94400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _borderSizeWithRadius: {x: 0, y: 0}
 --- !u!33 &7308274941435099850
 MeshFilter:
   m_ObjectHideFlags: 0

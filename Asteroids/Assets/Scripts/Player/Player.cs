@@ -4,16 +4,20 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour, IDamagable
 {
-    public event UnityAction GameOverEvent;
-    public event UnityAction<int> HealthUIEvent;
-    public event UnityAction<int> ScoreUIEvent;
+    public event UnityAction        GameOverEvent;
+    public event UnityAction<int>   HealthUIEvent;
+    public event UnityAction<int>   ScoreUIEvent;
 
-    [SerializeField] private GameObject _model;
-    private Rigidbody _rigidbody;
-    [SerializeField] private PlayerAudioController _audioController;
+    [SerializeField] private PlayerAudioController  _audioController;
+    [SerializeField] private GameObject             _model;
+    [SerializeField] private int                    _startHealth = 3;
+    [SerializeField] private float                  _timeOfInvulnerability = 3;
+    [SerializeField] private float                  _blinkRate = 2;
 
-    private int _startHealth = 3;
-    [SerializeField] private int _health;
+    private Rigidbody   _rigidbody;
+    private int         _health;
+    private int         _score;
+
     public int Health
     {
         get { return _health; }
@@ -29,8 +33,6 @@ public class Player : MonoBehaviour, IDamagable
             }
         }
     }
-
-    [SerializeField] private int _score;
     public int Score
     {
         get { return _score; }
@@ -41,11 +43,9 @@ public class Player : MonoBehaviour, IDamagable
         }
     }
 
-    private float _timeOfInvulnerability = 3;
-    private float _blinkRate = 2;
     private bool _isInvulnerable = false;
 
-    void Awake()
+    private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
     }
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour, IDamagable
             return;
         }
 
-        if (component is Bullet && other.GetComponent<Bullet>().owner == gameObject)
+        if (component is Bullet && other.GetComponent<Bullet>()._owner == gameObject)
         {
             return;
         }

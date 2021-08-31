@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,14 +7,14 @@ public class BulletController : MonoBehaviour
     public event UnityAction<Material, Vector3, Vector3, GameObject> ShotEvent;
 
     [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private float _speed = 10f;
-    [SerializeField] private Material _materialShip;
-    [SerializeField] private Material _materialUFO;
+    [SerializeField] private Material   _materialBulletShip;
+    [SerializeField] private Material   _materialBulletUFO;
+    [SerializeField] private float      _speed = 10f;
 
-    private List<GameObject> _allBullets;
-    private Stack<GameObject> _bulletPool;
-    private float _widthScreen;
-    private GameObject _achorBullet;
+    private List<GameObject>    _allBullets;
+    private Stack<GameObject>   _bulletPool;
+    private GameObject          _achorBullet;
+    private float               _widthScreen;
 
     private void Awake()
     {
@@ -69,7 +68,7 @@ public class BulletController : MonoBehaviour
         Bullet bulletClass = bullet.GetComponent<Bullet>();
         bulletClass._offBullets = _bulletPool;
         bulletClass._timeToOff = _widthScreen / _speed;
-        bulletClass.owner = owner;
+        bulletClass._owner = owner;
 
         bullet.GetComponent<Renderer>().material = material;
     }

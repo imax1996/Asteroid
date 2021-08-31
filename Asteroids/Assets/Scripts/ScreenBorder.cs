@@ -1,13 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 public class ScreenBorder : MonoBehaviour
 {
-    [SerializeField] private Vector2 _borderSizeWithRadius;
+    private SphereCollider  _sphereCollider;
+    private Vector2         _borderSizeWithRadius;
 
-    private SphereCollider _sphereCollider;
     private float offsetAfterChangePosition = -0.95f;
 
     private void Start()

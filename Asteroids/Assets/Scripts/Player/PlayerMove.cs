@@ -2,12 +2,12 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    private Rigidbody _rigidbody = null;
-    private AudioSource _audioSource = null;
-
     [SerializeField] private float _maxSpeed = 3f;
     [SerializeField] private float _acceleration = 5f;
     [SerializeField] private float _speedOfRotate = 3f;
+
+    private AudioSource _audioSource;
+    private Rigidbody   _rigidbody;
 
     private void Awake()
     {

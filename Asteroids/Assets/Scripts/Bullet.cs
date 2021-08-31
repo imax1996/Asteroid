@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class Bullet : MonoBehaviour, IDamagable
 {
-    public GameObject owner;
+    [HideInInspector] public GameObject _owner;
+    [HideInInspector] public float      _timeToOff = 0;
+
     public Stack<GameObject> _offBullets;
-    public float _timeToOff = 0;
 
     private void Update()
     {
@@ -47,32 +46,23 @@ public class Bullet : MonoBehaviour, IDamagable
         }
         else if (component is UFO)
         {
-            if (owner.TryGetComponent(out Player player)) {
+            if (_owner.TryGetComponent(out Player player)) {
                 TryToAddScore(200);
                 OffBullet();
             }
         }
         else if (component is Player)
         {
-            if (owner.TryGetComponent(out UFO ufo))
+            if (_owner.TryGetComponent(out UFO ufo))
             {
                 OffBullet();
             }
         }
     }
 
-    private void TryToOff()
-    {
-        if (owner.TryGetComponent(out Player player))
-        {
-            OffBullet();
-        }
-
-    }
-
     private void TryToAddScore(int score)
     {
-        if (owner.TryGetComponent(out Player player))
+        if (_owner.TryGetComponent(out Player player))
         {
             player.Score += score;
         }

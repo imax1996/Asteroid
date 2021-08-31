@@ -8,7 +8,7 @@ public class UFO : MonoBehaviour, IDamagable
     {
         other.TryGetComponent(typeof(IDamagable), out Component component);
 
-        if (component is Bullet && other.GetComponent<Bullet>().owner == gameObject)
+        if (component is Bullet && other.GetComponent<Bullet>()._owner == gameObject)
         {
             return;
         }

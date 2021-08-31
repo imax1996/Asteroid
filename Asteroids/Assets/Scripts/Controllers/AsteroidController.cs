@@ -1,27 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AsteroidController : MonoBehaviour
 {
     [SerializeField] private LevelController _levelController;
-
     [SerializeField] private GameObject _asteroidPrefab;
-    [SerializeField] private float[] _scalesOfAsteroids;
 
-    private List<GameObject> _allAsteroids;
-    private Stack<GameObject> _asteroidPool;
-    private Vector2         _borderMainCamera;
+    [SerializeField] private float[]    _scalesOfAsteroids;
+    [SerializeField] private float      _minSpeed = 1;
+    [SerializeField] private float      _maxSpeed = 3;
+    [SerializeField] private float      _rotateInSeparation = 45;
 
-    [SerializeField] private float _minSpeed = 1;
-    [SerializeField] private float _maxSpeed = 3;
-    [SerializeField] private float _rotateInSeparation = 45;
+    private List<GameObject>    _allAsteroids;
+    private Stack<GameObject>   _asteroidPool;
 
-    private GameObject _anchorAsteroid;
+    private Vector2             _borderMainCamera;
+    private GameObject          _anchorAsteroid;
 
-    private AudioSource _audioSource;
+    private AudioSource         _audioSource;
 
-    public void Awake()
+    private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
         _allAsteroids = new List<GameObject>();

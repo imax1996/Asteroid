@@ -3,16 +3,20 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    [SerializeField] private AsteroidController _asteroidController = null;
-    [SerializeField] private BulletController _bulletController = null;
-    [SerializeField] private UFOController _uFOController = null;
+    [SerializeField] private AsteroidController _asteroidController;
+    [SerializeField] private BulletController   _bulletController;
+    [SerializeField] private UFOController      _uFOController;
 
-    private float _secondsNewLevel = 2;
-    private int _countOfAsteroids = 0;
+    [SerializeField] private float   _delayNextLevel = 2;
+
+    private int     _level = 0;
+    private int     _countOfAsteroids = 0;
+
     public int CountOfAsteroids
     {
         get { return _countOfAsteroids; }
-        set {
+        set
+        {
             _countOfAsteroids = value;
             if (value <= 0)
             {
@@ -20,8 +24,6 @@ public class LevelController : MonoBehaviour
             }
         }
     }
-
-    private int _level = 0;
 
     public void StartNewGame()
     {
@@ -40,7 +42,7 @@ public class LevelController : MonoBehaviour
 
     private IEnumerator StartNextLevel()
     {
-        yield return new WaitForSeconds(_secondsNewLevel);
+        yield return new WaitForSeconds(_delayNextLevel);
         if (_countOfAsteroids == 0)
         {
             NextLevel();

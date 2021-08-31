@@ -1,16 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerShot : MonoBehaviour
 {
-    [SerializeField] private BulletController _bulletController;
-    [SerializeField] private Material _bulletMaterial;
-    [SerializeField] private GameObject _gun;
+    [SerializeField] private BulletController   _bulletController;
+    [SerializeField] private Material           _bulletMaterial;
+    [SerializeField] private GameObject         _gun;
+    [SerializeField] private AudioSource        _audioSource;
+    [SerializeField] private int                _fireRate = 3;
 
-    [SerializeField] private int _fireRate = 3;
     private float _timeToShot = 0;
-    [SerializeField] private AudioSource _audioSource;
 
     private void OnEnable()
     {
